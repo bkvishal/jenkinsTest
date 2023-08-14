@@ -24,6 +24,10 @@ public class CustomerDao {
     }
 
     public Optional<Customer> findById(Long custId) {
+        customerList.add(new Customer(1L, "Shiv", "Paramdham", "Universe", 0));
+        customerList.add(new Customer(2L, "Max", "West coast", "US", 29));
+        customerList.add(new Customer(3L, "goku", "NYC", "UK", 26));
+        customerList.add(new Customer(4L, "entium", "GZB", "India", 27));
          //customerList.stream().filter(customer -> customer.getCustId().equals(custId)).findFirst().orElseThrow(() -> new RuntimeException("User not found"));
         return customerList.stream().filter(customer -> customer.getCustId().equals(custId)).findAny();
     }
@@ -34,6 +38,10 @@ public class CustomerDao {
     }
 
     public void deleteById(Long custId) {
+        customerList.add(new Customer(1L, "Shiv", "Paramdham", "Universe", 0));
+        customerList.add(new Customer(2L, "Max", "West coast", "US", 29));
+        customerList.add(new Customer(3L, "goku", "NYC", "UK", 26));
+        customerList.add(new Customer(4L, "entium", "GZB", "India", 27));
         Customer customer1 = customerList.stream().filter(customer -> customer.getCustId().equals(custId)).findFirst().get();
         customerList.remove(customer1);
     }

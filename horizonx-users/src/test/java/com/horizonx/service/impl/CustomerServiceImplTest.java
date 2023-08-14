@@ -11,13 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-
+@SpringBootTest
 public class CustomerServiceImplTest {
 
     @Mock
@@ -31,7 +32,7 @@ public class CustomerServiceImplTest {
     public void testGetByCustId() {
         // given
         Long custId = 1L;
-        Customer customer = new Customer(1L, "John", "west coast", "US", 42);
+        Customer customer = new Customer(1L, "Shiv", "Paramdham", "Universe", 0);
 
         // when
         when(customerRepository.findById(custId)).thenReturn(Optional.of(customer));
@@ -57,8 +58,8 @@ public class CustomerServiceImplTest {
     public void testGetAllCustomers() {
         // given
         List<Customer> customers = Arrays.asList(
-                new Customer(1L, "John", "west coast", "US", 42),
-                new Customer(2L, "Don", "east coast", "UK", 38)
+                new Customer(1L, "Shiv", "Paramdham", "Universe", 0),
+                new Customer(2L, "Max", "West coast", "US", 29)
         );
 
         // when
@@ -72,16 +73,16 @@ public class CustomerServiceImplTest {
     @Test
     public void testAddCustomer() {
         // given
-        Customer customer = new Customer(1L, "John", "west coast", "US", 42);
+        Customer customer = new Customer(1L, "Shiv", "Paramdham", "Universe", 0);
 
         // when
-        when(customerRepository.save(customer)).thenReturn(new Customer(1L, "John", "west coast", "US", 42));
+        when(customerRepository.save(customer)).thenReturn(new Customer(2L, "Max", "West coast", "US", 29));
         Customer actualCustomer = customerService.addCustomer(customer);
 
         // then
-        Assertions.assertEquals(1L, actualCustomer.getCustId());
-        Assertions.assertEquals("John", actualCustomer.getCustomerName());
-        Assertions.assertEquals("west coast", actualCustomer.getAddress());
+        Assertions.assertEquals(2L, actualCustomer.getCustId());
+        Assertions.assertEquals("Max", actualCustomer.getCustomerName());
+        Assertions.assertEquals("West coast", actualCustomer.getAddress());
     }
 
     @Test

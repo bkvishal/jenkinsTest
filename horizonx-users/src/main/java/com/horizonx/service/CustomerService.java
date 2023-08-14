@@ -3,7 +3,6 @@ package com.horizonx.service;
 import com.horizonx.entity.Customer;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CustomerService {
 
