@@ -22,7 +22,7 @@ pipeline {
         }
         stage("Deliver"){
             steps {
-                sh '.horizonx-users/jenkins/scripts/deliver.sh'
+                sh './horizonx-users/jenkins/scripts/deliver.sh'
             }
         }
     }
