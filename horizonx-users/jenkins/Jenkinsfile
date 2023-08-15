@@ -22,9 +22,7 @@ pipeline {
         }
         stage("Completed"){
             steps {
-                dir("horizonx-users") {
-                       echo "Build done"
-                 }
+                echo "Build done"
             }
         }
         /* stage("Deliver"){
