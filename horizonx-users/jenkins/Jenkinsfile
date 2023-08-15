@@ -3,16 +3,12 @@ pipeline {
     stages {
         stage("Maven Build"){
             steps {
-                dir("jenkinsTest/horizonx-users") {
                     sh "mvn -B -Dskiptest clean package"
-                }
             }
         }
         stage("Tests"){
             steps {
-                dir("jenkinsTest/horizonx-users") {
                     sh "mvn test"
-                }
             }
             post {
                 always {
