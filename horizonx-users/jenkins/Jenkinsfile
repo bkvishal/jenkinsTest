@@ -22,6 +22,7 @@ pipeline {
         }
         stage("Deliver"){
             steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh "./horizonx-users/jenkins/scripts/deliver.sh"
             }
         }
