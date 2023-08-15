@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    parameters {
+        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean1")
+        booleanParam(defaultValue: true, description: "Envorinment?", name: "boolean2")
+    }
     stages {
         stage("Maven Build"){
             steps {
@@ -16,20 +20,19 @@ pipeline {
             }
             post {
                 always {
-                    junit 'horizonx-users/target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
-        stage("Completed the pipeline"){
+        stage("Boolean 1 select"){
             steps {
-                echo "Build done"
+                echo "booleanParam 1 is set to : ${params.boolean1}"
             }
         }
-        /* stage("Deliver"){
+        stage("Boolean 2 select"){
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
-                sh "./horizonx-users/jenkins/scripts/deliver.sh"
+                echo "booleanParam 2 is set to : ${params.boolean2}"
             }
-        } */
+        }
     }
 }
