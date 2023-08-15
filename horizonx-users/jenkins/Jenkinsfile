@@ -35,7 +35,7 @@ pipeline {
                 echo "dropdown is set to : ${params.env}"
             }
         }
-        stage("Dropdown select"){
+        stage("String input select"){
             steps {
                  echo "dropdown is set to : ${params.env}"
             }
