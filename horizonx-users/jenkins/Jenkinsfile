@@ -1,8 +1,14 @@
 pipeline {
     agent any
+    environment {
+        def myString = "Shiva baba"
+        def myNumber = 18
+        def myBoolean = true
+    }
     parameters {
-        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean1")
-        booleanParam(defaultValue: true, description: "Envorinment?", name: "boolean2")
+        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean")
+        choice(choices: ["IT", "UAT", "PRE-PROD", "PROD"], description: "Which environment to deploy", name: "env")
+        string(defaultValue: "TEST", description: "Which Cloud venor is used ", name: "cloud")
     }
     stages {
         stage("Maven Build"){
@@ -24,14 +30,44 @@ pipeline {
                 }
             }
         }
-        stage("Boolean 1 select"){
+        stage("Boolean select"){
             steps {
-                echo "booleanParam 1 is set to : ${params.boolean1}"
+                echo "booleanParam is set to : ${params.boolean}"
             }
         }
-        stage("Boolean 2 select"){
+        stage("Dropdown select"){
             steps {
-                echo "booleanParam 2 is set to : ${params.boolean2}"
+                echo "dropdown is set to : ${params.env}"
+            }
+        }
+        stage("String input select"){
+            steps {
+                 echo "dropdown is set to : ${params.env}"
+            }
+        }
+        stage("String variable"){
+            steps {
+                 echo "dropdown is set to : ${myString}"
+            }
+        }
+        stage("Number variable"){
+            steps {
+                 echo "dropdown is set to : ${myNumber}"
+            }
+        }
+        stage("Boolean variable"){
+            steps {
+                 echo "dropdown is set to : ${myBoolean}"
+            }
+        }
+        stage("Jenkins in-build variable 1"){
+            steps {
+                 echo "Current build number is : ${BUILD_NUMBER}"
+            }
+        }
+        stage("Jenkins in-build variable 2"){
+            steps {
+                 echo "Current build Id is : ${BUILD_ID}" + "${JOB_NAME}"
             }
         }
     }
