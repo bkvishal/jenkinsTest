@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage("Maven Build"){
+            steps {
+                dir("jenkinsTest/horizonx-users") {
+                    sh "mvn -B -Dskiptest clean package"
+                }
+            }
+        }
+        stage("Tests"){
+            steps {
+                dir("jenkinsTest/horizonx-users") {
+                    sh "mvn test"
+                }
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage("Deliver"){
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+            }
+        }
+    }
+}
