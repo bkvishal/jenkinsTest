@@ -1,8 +1,9 @@
 pipeline {
     agent any
     parameters {
-        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean1")
-        booleanParam(defaultValue: true, description: "Envorinment?", name: "boolean2")
+        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean")
+        choice(choices: ["IT", "UAT", "PRE-PROD", "PROD"], description: "Which environment to deploy", name: "env")
+        string(defaultValue: "TEST", description: "Which Cloud venor is used ", name: "cloud")
     }
     stages {
         stage("Maven Build"){
@@ -24,14 +25,19 @@ pipeline {
                 }
             }
         }
-        stage("Boolean 1 select"){
+        stage("Boolean select"){
             steps {
-                echo "booleanParam 1 is set to : ${params.boolean1}"
+                echo "booleanParam is set to : ${params.boolean}"
             }
         }
-        stage("Boolean 2 select"){
+        stage("Dropdown select"){
             steps {
-                echo "booleanParam 2 is set to : ${params.boolean2}"
+                echo "dropdown is set to : ${params.env}"
+            }
+        }
+        stage("Dropdown select"){
+            steps {
+                 echo "dropdown is set to : ${params.env}"
             }
         }
     }
