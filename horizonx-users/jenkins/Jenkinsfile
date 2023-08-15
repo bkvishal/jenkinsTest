@@ -20,11 +20,18 @@ pipeline {
                 }
             }
         }
-        stage("Deliver"){
+        stage("Completed"){
+            steps {
+                dir("horizonx-users") {
+                       echo "Build done"
+                 }
+            }
+        }
+        /* stage("Deliver"){
             steps {
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh "./horizonx-users/jenkins/scripts/deliver.sh"
             }
-        }
+        } */
     }
 }
