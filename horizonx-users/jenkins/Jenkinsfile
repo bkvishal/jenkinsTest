@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage("Completed"){
+        stage("Completed the pipeline"){
             steps {
                 echo "Build done"
             }
