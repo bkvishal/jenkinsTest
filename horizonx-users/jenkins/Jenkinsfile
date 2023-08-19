@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    env {
+    environment {
         def myString = "is always with me"
     }
 
