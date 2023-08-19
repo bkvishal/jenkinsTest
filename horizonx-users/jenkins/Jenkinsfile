@@ -37,7 +37,7 @@ pipeline {
         }
         stage("Want to launch?"){
             steps{
-                scripts{
+                script {
                     if(params.boolean == false) {
                         echo "Not going to launch"
                         currentBuild.result="SUCCESS"
