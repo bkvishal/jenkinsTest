@@ -48,6 +48,7 @@ pipeline {
         stage("String variable"){
             steps {
                  echo "dropdown is set to : ${myString}"
+                 sleep(10)
             }
         }
         stage("Number variable"){
