@@ -28,7 +28,7 @@ pipeline {
 
         stage("Your words") {
             steps {
-                myOwnFunc(stringParam, myString)
+                myOwnFunc(params.stringParam, myString)
             }
         }
     }
