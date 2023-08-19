@@ -37,6 +37,6 @@ pipeline {
 
 def myOwnFunc(String str, String strboolean) {
 for(int i=0; i < 5; i++ ) {
-echo "${str} " " ${strboolean}"
+echo "${str}  ${strboolean}"
 }
 }
