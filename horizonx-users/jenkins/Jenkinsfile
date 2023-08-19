@@ -35,41 +35,18 @@ pipeline {
                 echo "booleanParam is set to : ${params.boolean}"
             }
         }
-        stage("Dropdown select"){
-            steps {
-                echo "dropdown is set to : ${params.env}"
+        stage("Want to launch?"){
+            steps{
+                scripts{
+                    if(params.boolean == false) {
+                        echo "Not going to launch"
+                        currentBuild.result="SUCCESS"
+                    } else {
+                        echo "Successfully launched"
+                    }
+                }
             }
         }
-        stage("String input select"){
-            steps {
-                 echo "dropdown is set to : ${params.env}"
-            }
-        }
-        stage("String variable"){
-            steps {
-                 echo "dropdown is set to : ${myString}"
-                 sleep(10)
-            }
-        }
-        stage("Number variable"){
-            steps {
-                 echo "dropdown is set to : ${myNumber}"
-            }
-        }
-        stage("Boolean variable"){
-            steps {
-                 echo "dropdown is set to : ${myBoolean}"
-            }
-        }
-        stage("Jenkins in-build variable 1"){
-            steps {
-                 echo "Current build number is : ${BUILD_NUMBER}"
-            }
-        }
-        stage("Jenkins in-build variable 2"){
-            steps {
-                 echo "Current build Id is : ${BUILD_ID}" + "${JOB_NAME}"
-            }
-        }
+
     }
 }
