@@ -1,75 +1,42 @@
 pipeline {
     agent any
-    environment {
-        def myString = "Shiva baba"
-        def myNumber = 18
-        def myBoolean = true
+
+    env {
+        def myString = "is always with me"
     }
+
     parameters {
-        booleanParam(defaultValue: false, description: "Enable Service?", name: "boolean")
-        choice(choices: ["IT", "UAT", "PRE-PROD", "PROD"], description: "Which environment to deploy", name: "env")
-        string(defaultValue: "TEST", description: "Which Cloud venor is used ", name: "cloud")
+        string(defaultValue: "baba", description: "Select your world", name: "stringParam")
     }
+
     stages {
-        stage("Maven Build"){
+        stage("Maven build") {
             steps {
                 dir("horizonx-users") {
-                    sh "mvn -B -Dskiptest clean package"
+                    sh "mvn clean install"
                 }
             }
         }
-        stage("Tests"){
+
+        stage("Tests") {
             steps {
                 dir("horizonx-users") {
                     sh "mvn test"
                 }
             }
-            post {
-                always {
-                    junit 'horizonx-users/target/surefire-reports/*.xml'
-                }
-            }
         }
-        stage("Boolean select"){
+
+        stage("Your words") {
             steps {
-                echo "booleanParam is set to : ${params.boolean}"
-            }
-        }
-        stage("Dropdown select"){
-            steps {
-                echo "dropdown is set to : ${params.env}"
-            }
-        }
-        stage("String input select"){
-            steps {
-                 echo "dropdown is set to : ${params.env}"
-            }
-        }
-        stage("String variable"){
-            steps {
-                 echo "dropdown is set to : ${myString}"
-                 sleep(10)
-            }
-        }
-        stage("Number variable"){
-            steps {
-                 echo "dropdown is set to : ${myNumber}"
-            }
-        }
-        stage("Boolean variable"){
-            steps {
-                 echo "dropdown is set to : ${myBoolean}"
-            }
-        }
-        stage("Jenkins in-build variable 1"){
-            steps {
-                 echo "Current build number is : ${BUILD_NUMBER}"
-            }
-        }
-        stage("Jenkins in-build variable 2"){
-            steps {
-                 echo "Current build Id is : ${BUILD_ID}" + "${JOB_NAME}"
+                myOwnFunc(stringParam, myString)
             }
         }
     }
+}
+
+
+def myOwnFunc(String str, String strboolean) {
+for(int i=0; i < 5; i++ ) {
+echo "${str} + ${strboolean}"
+}
 }
